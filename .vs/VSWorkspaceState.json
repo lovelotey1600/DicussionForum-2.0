@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Controller",
+    "\\Model",
     "\\View"
   ],
   "SelectedNode": "\\MainFrame.py",

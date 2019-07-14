@@ -3,6 +3,7 @@ sys.path.append("..")
 import tkinter as tk
 import tkinter.ttk as ttk
 from View.startDFrame import *
+from View.discussionFrame import *
 
 class homeFrame:
     def startDFrame(self):
@@ -11,7 +12,8 @@ class homeFrame:
 
 
     def forumDisplay(self):
-        pass
+       self.TLabelframe1.configure(text='''Forum''')
+       df=discussionFrame(self.TLabelframe1)
 
     def searchBarDisplay(self):
         self.searchB = ttk.Button(self.sideFrame)
@@ -46,7 +48,7 @@ class homeFrame:
         self.startD.configure(text='''Start a new Discussion''')
 
         self.chatroomB = ttk.Button(self.sideFrame)
-        self.chatroomB.place(relx=0.15, rely=0.167, height=25, width=128)
+        self.chatroomB.place(relx=0.15, rely=0.167, height=25, width=132)
         self.chatroomB.configure(takefocus="")
         self.chatroomB.configure(text='''Create a Chatroom''')
 
@@ -66,6 +68,8 @@ class homeFrame:
         self.TLabelframe1.configure(relief='')
         self.TLabelframe1.configure(text='''Forum''')
         self.TLabelframe1.configure(width=600)
+
+        self.forumDisplay()
 
 
 

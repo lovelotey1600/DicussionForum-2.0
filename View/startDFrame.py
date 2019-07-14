@@ -4,6 +4,12 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 class startDFrame:
+    def insertQuestion(self):
+        ques=self.questionT.get("1.0",'end-1c')
+        ans=self.answerT.get("1.0",'end-1c')
+        f=ForumFunctions
+        f.createQuestion(f,ques,ans)
+
     def __init__(self,top=None):
         self.questionT = tk.Text(top)
         self.questionT.place(relx=0.4, rely=0.134, relheight=0.108, relwidth=0.44
@@ -33,7 +39,7 @@ class startDFrame:
         self.answerT.configure(width=464)
         self.answerT.configure(wrap="word")
 
-        self.submitQ = ttk.Button(top)
+        self.submitQ = ttk.Button(top,command=self.insertQuestion)
         self.submitQ.place(relx=0.375, rely=0.882, height=25, width=110
                 , bordermode='ignore')
         self.submitQ.configure(takefocus="")
@@ -49,7 +55,7 @@ class startDFrame:
         self.TLabel1.configure(text='''Enter the title to your Query :''')
         self.TLabel1.configure(width=165)
 
-        self.TLabel2 = ttk.Label(self.TLabelframe1)
+        self.TLabel2 = ttk.Label(top)
         self.TLabel2.place(relx=0.083, rely=0.336, height=19, width=145
                 , bordermode='ignore')
         self.TLabel2.configure(background="#d9d9d9")

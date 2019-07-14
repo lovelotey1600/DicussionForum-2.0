@@ -104,12 +104,28 @@ class DbFunctions:
             messagebox.showinfo("Error ","This question had previously been asked. Try searching for that question")   
             self.mydb.close()
 
+    def getQuestionID(self,ques):
+        self.mydb=DbConnection.getConnection()
+        self.mycursor=self.mydb.cursor()
+        print(ques)
+        self.sql1="select ques_id from forumTable where questionTitle = %s ;"
+        self.que=(ques,)
+        self.mycursor.execute(self.sql1,self.que)
+        self.re=self.mycursor.fetchone()
+        self.l=str(self.re[0])
+        self.l=self.l+"q"
+        print(self.l)
+        return self.l
+        self.mydb.close()
+
     def insertAnsTable(self,que,ans):
+        self.q=que
+        print(self.q)
         self.mydb=DbConnection.getConnection()
         self.mycursor=self.mydb.cursor()
         self.sql="insert into {table} (answer) values (%s) "
         self.values=(ans,)
-        self.mycursor.execute(self.sql.format(table=self.l),self.values)
+        self.mycursor.execute(self.sql.format(table=self.q),self.values)
         self.mydb.commit()
         self.mydb.close()
        
@@ -134,7 +150,28 @@ class DbFunctions:
             list_of_questions.append(re[i][0])
         
         return list_of_questions
-    
+
+    def getAnswerfromList(self,q):
+        self.mydb=DbConnection.getConnection()
+        self.mycursor=self.mydb.cursor()
+        self.sql="select count(*) from {table}"
+        self.mycursor.execute(self.sql.format(table=q))
+        re=self.mycursor.fetchone()
+        self.mydb.close()
+        return re[0]
+
+    def getAnsers(self,q):
+        self.mydb=DbConnection.getConnection()
+        self.mycursor=self.mydb.cursor()
+        self.sql="select answer from {table} "
+        self.mycursor.execute(self.sql.format(table=q))
+        re=self.mycursor.fetchall()
+        self.mydb.close()
+        list_of_answers=[]
+        for i in range(len(re)):
+            list_of_answers.append(re[i][0])
+        print (list_of_answers)
+        return list_of_answers
         
     
 
