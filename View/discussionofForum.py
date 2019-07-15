@@ -9,9 +9,9 @@ class discussionofForum:
     def on_configure(self,event):
         # update scrollregion after starting 'mainloop'
         # when all widgets are in canvas1
-        self.canvas1.configure(scrollregion=self.canvas1.bbox('all'),width=300,height=300)
+        self.canvas1.configure(scrollregion=self.canvas1.bbox('all'))
     
-    def refresh(self):
+    def refreshf(self):
         l=ForumFunctions
         self.list=l.getAnswersList(l,self.q)
         self.ranswers=l.getAnswers(l,self.q)
@@ -31,12 +31,12 @@ class discussionofForum:
 
     def addDiscussion(self,que):
         answer = self.task_create.get(1.0,tk.END).strip()
-        print(que)
         l=ForumFunctions
+        
         l.insertAnswers(l,que,answer)
 
         self.task_create.delete(1.0, tk.END)
-        self.refresh()
+        self.refreshf()
 
     def __init__(self,top=None,que=None):
         self.canvas1=tk.Canvas(top)
@@ -46,20 +46,20 @@ class discussionofForum:
         self.forumFrame = ttk.Frame(self.canvas1)
         self.canvas1.create_window((0,20), window=self.forumFrame, anchor='w')
 
-        self.scroll=tk.Scrollbar(top,command=self.canvas1.yview)
+        self.scroll=tk.Scrollbar(self.canvas1,command=self.canvas1.yview)
         self.scroll.pack(side=tk.RIGHT,fill='y')
         
         self.task_create = tk.Text(top, height=3, bg="white", fg="black")
         self.task_create.pack(side=tk.BOTTOM, fill='x')
         self.task_create.focus_set()
-
         self.task_create.bind("<Return>", lambda e : self.addDiscussion(self.q))
+
         self.canvas1.configure(yscrollcommand = self.scroll.set)
         self.canvas1.bind('<Configure>', self.on_configure)
 
         self.label_widgets=[]
         
-        self.refresh()
+        self.refreshf()
         
         
         

@@ -11,10 +11,9 @@ class discussionFrame:
         self.canvas.configure(scrollregion=self.canvas.bbox('all'))
 
     def discussionofForum(self,que):
-        self.canvas.delete("all")
+        self.f.destroy()
         d= discussionofForum(self.t,que)
 
-        pass
     def refresh(self):
         l=ForumFunctions
         self.list=l.getList1(l)
@@ -30,12 +29,15 @@ class discussionFrame:
             self.label_widgets[-1].bind("<Button-1>",lambda e: self.discussionofForum(self.qu))
 
     def __init__(self, top=None):
+        
         self.t=top
-        self.canvas=tk.Canvas(top)
+        self.f=tk.Frame(self.t)
+        self.f.pack(expand=True, fill='both')
+        self.canvas=tk.Canvas(self.f)
         self.canvas.place(x=0,y=10)
         
 
-        self.scroll=tk.Scrollbar(top,command=self.canvas.yview)
+        self.scroll=tk.Scrollbar(self.f,command=self.canvas.yview)
         self.scroll.pack(side=tk.RIGHT,fill='y')
         
 

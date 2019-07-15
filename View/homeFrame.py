@@ -7,13 +7,17 @@ from View.discussionFrame import *
 
 class homeFrame:
     def startDFrame(self):
+        self.df.f.destroy()
+        del(self.df)
         self.TLabelframe1.configure(text='''Start a new Discussion''')
         sd=startDFrame(self.TLabelframe1)
+        
 
+    
 
     def forumDisplay(self):
        self.TLabelframe1.configure(text='''Forum''')
-       df=discussionFrame(self.TLabelframe1)
+       self.df=discussionFrame(self.TLabelframe1)
 
     def searchBarDisplay(self):
         self.searchB = ttk.Button(self.sideFrame)
@@ -57,7 +61,7 @@ class homeFrame:
         self.searchBarB.configure(takefocus="")
         self.searchBarB.configure(text='''Search for a Discussion''')
 
-        self.exitB = ttk.Button(self.sideFrame)
+        self.exitB = ttk.Button(self.sideFrame,command=exit)
         self.exitB.place(relx=0.325, rely=0.875, height=25, width=70)
         self.exitB.configure(takefocus="")
         self.exitB.configure(text='''Exit''')

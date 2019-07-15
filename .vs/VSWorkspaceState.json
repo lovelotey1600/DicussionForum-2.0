@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controller",
     "\\Model",
     "\\View"
   ],
-  "SelectedNode": "\\MainFrame.py",
+  "SelectedNode": "\\View\\startDFrame.py",
   "PreviewInSolutionExplorer": false
 }

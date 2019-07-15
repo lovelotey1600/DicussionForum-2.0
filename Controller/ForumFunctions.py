@@ -20,13 +20,14 @@ class ForumFunctions:
     def createQuestion(self,ques,ans):
         f2=DbFunctions
         f2.crtQuesTable(f2,ques)
-        f2.insertAnsTable(f2,ques,ans)
+        f2.insertAnsatFirst(ques,ans)
 
     def insertAnswers(self,que,ans):
         f2=DbFunctions
-        print(que)
         q=f2.getQuestionID(f2,que)
+        
         f2.insertAnsTable(f2,q,ans)
+
 
     def getAnswersList(self,que):
         f2=DbFunctions

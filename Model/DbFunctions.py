@@ -90,10 +90,9 @@ class DbFunctions:
             self.re=self.mycursor.fetchone()
             self.l=str(self.re[0])
             self.l=self.l+"q"
-
             self.mydb.close()
 
-
+           
             self.mydb=DbConnection.getConnection()
             self.mycursor=self.mydb.cursor()
             self.sql2="CREATE TABLE IF NOT EXISTS {table} (answer_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,answer TEXT not null,upvote int DEFAULT '0',date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);"
@@ -107,20 +106,19 @@ class DbFunctions:
     def getQuestionID(self,ques):
         self.mydb=DbConnection.getConnection()
         self.mycursor=self.mydb.cursor()
-        print(ques)
+        
         self.sql1="select ques_id from forumTable where questionTitle = %s ;"
         self.que=(ques,)
         self.mycursor.execute(self.sql1,self.que)
         self.re=self.mycursor.fetchone()
         self.l=str(self.re[0])
         self.l=self.l+"q"
-        print(self.l)
+        
         return self.l
         self.mydb.close()
 
-    def insertAnsTable(self,que,ans):
-        self.q=que
-        print(self.q)
+    def insertAnsatFirst(self,que,ans):
+        self.q=self.getQuestionID(self,que)
         self.mydb=DbConnection.getConnection()
         self.mycursor=self.mydb.cursor()
         self.sql="insert into {table} (answer) values (%s) "
@@ -129,6 +127,16 @@ class DbFunctions:
         self.mydb.commit()
         self.mydb.close()
        
+    def insertAnsTable(self,que,ans):
+        self.mydb=DbConnection.getConnection()
+        self.mycursor=self.mydb.cursor()
+        self.sql="insert into {table} (answer) values (%s) "
+        self.values=(ans,)
+        self.mycursor.execute(self.sql.format(table=que),self.values)
+        self.mydb.commit()
+        self.mydb.close()
+    
+
     def getList(self):
         self.mydb=DbConnection.getConnection()
         self.mycursor=self.mydb.cursor()
@@ -170,7 +178,6 @@ class DbFunctions:
         list_of_answers=[]
         for i in range(len(re)):
             list_of_answers.append(re[i][0])
-        print (list_of_answers)
         return list_of_answers
         
     
