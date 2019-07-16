@@ -70,7 +70,7 @@ class registrationFrame:
         self.uID.configure(takefocus="")
         self.uID.configure(cursor="ibeam")
 
-        self.rgstB = ttk.Button(self.rgFrame)
+        self.rgstB = ttk.Button(self.rgFrame,command=self.rgstrU)
         self.rgstB.place(relx=0.4, rely=0.867, height=25, width=76)
         self.rgstB.configure(takefocus="")
         self.rgstB.configure(text='''Register''')

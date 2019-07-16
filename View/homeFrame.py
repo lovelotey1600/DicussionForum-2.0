@@ -4,6 +4,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from View.startDFrame import *
 from View.discussionFrame import *
+from View.searchDFrame import *
 
 class homeFrame:
     def startDFrame(self):
@@ -11,20 +12,20 @@ class homeFrame:
         del(self.df)
         self.TLabelframe1.configure(text='''Start a new Discussion''')
         sd=startDFrame(self.TLabelframe1)
-        
-
-    
 
     def forumDisplay(self):
-       self.TLabelframe1.configure(text='''Forum''')
-       self.df=discussionFrame(self.TLabelframe1)
+        self.df=discussionFrame(self.TLabelframe1)
+
+    
+    def search(self):
+        self.df.f.destroy()
+        del(self.df)
+        self.TLabelframe1.configure(text='''Search Discussion''')
+        ques=self.searchT.get("1.0",'end-1c')
+        search=searchDFrame(self.TLabelframe1,ques)
 
     def searchBarDisplay(self):
-        self.searchB = ttk.Button(self.sideFrame)
-        self.searchB.place(relx=0.55, rely=0.333, height=60, width=52)
-        self.searchB.configure(takefocus="")
-        self.searchB.configure(text='''S''')
-
+        
         self.searchT = tk.Text(self.sideFrame)
         self.searchT.place(relx=0.15, rely=0.333, relheight=0.1, relwidth=0.35)
         self.searchT.configure(background="white")
@@ -37,6 +38,11 @@ class homeFrame:
         self.searchT.configure(selectforeground="black")
         self.searchT.configure(width=10)
         self.searchT.configure(wrap="word")
+
+        self.searchB = ttk.Button(self.sideFrame,command=self.search)
+        self.searchB.place(relx=0.55, rely=0.333, height=60, width=52)
+        self.searchB.configure(takefocus="")
+        self.searchB.configure(text='''S''')
 
     def __init__(self,top=None):
         self.sideFrame = ttk.Frame(top)
@@ -51,10 +57,10 @@ class homeFrame:
         self.startD.configure(takefocus="")
         self.startD.configure(text='''Start a new Discussion''')
 
-        self.chatroomB = ttk.Button(self.sideFrame)
-        self.chatroomB.place(relx=0.15, rely=0.167, height=25, width=132)
-        self.chatroomB.configure(takefocus="")
-        self.chatroomB.configure(text='''Create a Chatroom''')
+        #self.chatroomB = ttk.Button(self.sideFrame,command=self.home)
+        #self.chatroomB.place(relx=0.15, rely=0.167, height=25, width=132)
+        #self.chatroomB.configure(takefocus="")
+        #self.chatroomB.configure(text='''Home''')
 
         self.searchBarB = ttk.Button(self.sideFrame,command=self.searchBarDisplay)
         self.searchBarB.place(relx=0.15, rely=0.25, height=25, width=132)

@@ -4,6 +4,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from Controller.ForumFunctions import *
 from View.discussionofForum import *
+
 class discussionFrame:
     def on_configure(self,event):
         # update scrollregion after starting 'mainloop'
@@ -34,12 +35,10 @@ class discussionFrame:
         self.f=tk.Frame(self.t)
         self.f.pack(expand=True, fill='both')
         self.canvas=tk.Canvas(self.f)
-        self.canvas.place(x=0,y=10)
-        
+        self.canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
 
         self.scroll=tk.Scrollbar(self.f,command=self.canvas.yview)
         self.scroll.pack(side=tk.RIGHT,fill='y')
-        
 
         self.canvas.configure(yscrollcommand = self.scroll.set)
         self.canvas.bind('<Configure>', self.on_configure)

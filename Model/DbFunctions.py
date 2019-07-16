@@ -69,9 +69,20 @@ class DbFunctions:
             self.mydb.close()
             return re[1]
         
+    def searchsimilar(self,ques):
+        self.sq=ques
+        s = self.searchQues(self,sq)
+        if s==1:
+            mydb=DbConnection.getConnection()
+            mycursor=self.mydb.cursor()
+            sql="select * from forumTable where questionTitle Like (%s)"
+            que=(self.sq,)
+            mycursor.execute(self.sql,self.que)
+        
 
 
     def crtQuesTable(self,ques):
+        self.crtForumTable(self)
         qu=self.searchQues(self,ques)
         if qu==1:
             self.mydb=DbConnection.getConnection()

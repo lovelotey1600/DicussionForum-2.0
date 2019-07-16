@@ -2,10 +2,15 @@ import sys
 sys.path.append("..")
 import tkinter as tk
 import tkinter.ttk as ttk
-from tkinter import messagebox
+from View.discussionFrame import *
 from Controller.ForumFunctions import *
 
+
 class discussionofForum:
+    def home(self):
+        self.dff.destroy()
+        self.df=discussionFrame(self.tf)
+
     def on_configure(self,event):
         # update scrollregion after starting 'mainloop'
         # when all widgets are in canvas1
@@ -39,17 +44,22 @@ class discussionofForum:
         self.refreshf()
 
     def __init__(self,top=None,que=None):
-        self.canvas1=tk.Canvas(top)
-        self.canvas1.place(x=0,y=10,height=550,width=590)
+        self.tf=top
+        self.dff=tk.Frame(self.tf)
+        self.dff.pack(expand=True, fill='both')
+        self.home=ttk.Button(self.dff,text="Home",command=self.home)
+        self.home.pack()
+        self.canvas1=tk.Canvas(self.dff)
+        self.canvas1.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
         self.q=que
         
         self.forumFrame = ttk.Frame(self.canvas1)
         self.canvas1.create_window((0,20), window=self.forumFrame, anchor='w')
 
-        self.scroll=tk.Scrollbar(self.canvas1,command=self.canvas1.yview)
+        self.scroll=tk.Scrollbar(self.dff,command=self.canvas1.yview)
         self.scroll.pack(side=tk.RIGHT,fill='y')
         
-        self.task_create = tk.Text(top, height=3, bg="white", fg="black")
+        self.task_create = tk.Text(top, height=2, bg="white", fg="black")
         self.task_create.pack(side=tk.BOTTOM, fill='x')
         self.task_create.focus_set()
         self.task_create.bind("<Return>", lambda e : self.addDiscussion(self.q))
